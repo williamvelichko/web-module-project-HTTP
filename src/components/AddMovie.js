@@ -4,10 +4,10 @@ import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 //import axios from "axios";
-const AddMovie = () => {
-  //const { push } = useHistory();
+const AddMovie = (props) => {
+  const { push } = useHistory();
 
-  // const { setMovies } = props;
+  const { setMovies } = props;
   const [movie, setMovie] = useState({
     title: "",
     director: "",
@@ -15,8 +15,24 @@ const AddMovie = () => {
     metascore: 0,
     description: "",
   });
-  const handleSubmit = () => {};
-  const handleChange = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:9000/api/movies", movie)
+      .then((resp) => {
+        console.log(resp);
+        setMovies(resp.data);
+        push("/movies");
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleChange = (e) => {
+    setMovie({
+      ...movie,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const { title, director, genre, metascore, description } = movie;
 
