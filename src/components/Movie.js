@@ -4,7 +4,7 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
 const Movie = (props) => {
-  const { addToFavorites } = props;
+  const { addToFavorites, deleteMovie } = props;
 
   const [movie, setMovie] = useState("");
 
@@ -21,6 +21,14 @@ const Movie = (props) => {
         console.log(err.response);
       });
   }, [id]);
+
+  const handleDelete = () => {
+    axios.delete(`http://localhost:9000/api/movies/${id}`).then((resp) => {
+      deleteMovie(resp.data);
+      push("/movies");
+    });
+    //  deleteMovie(resp.data);
+  };
 
   return (
     <div className="modal-page col">
@@ -73,6 +81,7 @@ const Movie = (props) => {
                     type="button"
                     className="m-2 btn btn-danger"
                     value="Delete"
+                    onClick={handleDelete}
                   />
                 </span>
               </section>
