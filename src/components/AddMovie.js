@@ -20,7 +20,7 @@ const AddMovie = (props) => {
     axios
       .post("http://localhost:9000/api/movies", movie)
       .then((resp) => {
-        console.log(resp);
+        // console.log(resp);
         setMovies(resp.data);
         push("/movies");
       })

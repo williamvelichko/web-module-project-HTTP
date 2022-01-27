@@ -32,6 +32,18 @@ const Movie = (props) => {
     //  deleteMovie(resp.data);
   };
 
+  const handleAddFavorite = (e) => {
+    e.preventDefault();
+    axios
+      .get(`http://localhost:9000/api/movies/${id}`)
+      .then((resp) => {
+        //console.log(resp);
+        addToFavorites(resp.data);
+        push("/movies");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="modal-page col">
       <div className="modal-dialog">
@@ -71,7 +83,9 @@ const Movie = (props) => {
               </section>
 
               <section>
-                <span className="m-2 btn btn-dark">Favorite</span>
+                <span onClick={handleAddFavorite} className="m-2 btn btn-dark">
+                  Favorite
+                </span>
                 <Link
                   to={`/movies/edit/${movie.id}`}
                   className="m-2 btn btn-success"

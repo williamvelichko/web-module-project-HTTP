@@ -23,6 +23,7 @@ const DeleteMovieModal = (props) => {
     e.preventDefault();
     axios.delete(`http://localhost:9000/api/movies/${id}`).then((resp) => {
       props.deleteMovie(resp.data);
+
       push("/movies");
     });
   };

@@ -16,6 +16,8 @@ import axios from "axios";
 const App = (props) => {
   const [movies, setMovies] = useState([]);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
+
+  console.log(favoriteMovies);
   const { id } = useParams();
   useEffect(() => {
     axios
@@ -32,7 +34,12 @@ const App = (props) => {
     setMovies(item);
   };
 
-  const addToFavorites = (movie) => {};
+  const addToFavorites = (movie) => {
+    // movies.filter((movie) => {
+    //   setFavoriteMovies([...favoriteMovies, movie]);
+    // });
+    setFavoriteMovies([...favoriteMovies, movie]);
+  };
 
   return (
     <div>
@@ -47,7 +54,10 @@ const App = (props) => {
 
           <Switch>
             <Route path="/movies/edit/deletemovie/:id">
-              <DeleteMovieModal deleteMovie={deleteMovie} />
+              <DeleteMovieModal
+                deleteMovie={deleteMovie}
+                favoriteMovies={favoriteMovies}
+              />
             </Route>
             <Route path="/movies/edit/:id">
               <EditMovieForm setMovies={setMovies} />
@@ -57,7 +67,10 @@ const App = (props) => {
             </Route>
 
             <Route path="/movies/:id">
-              <Movie deleteMovie={deleteMovie} />
+              <Movie
+                deleteMovie={deleteMovie}
+                addToFavorites={addToFavorites}
+              />
             </Route>
 
             <Route path="/movies">
