@@ -10,6 +10,7 @@ import FavoriteMovieList from "./components/FavoriteMovieList";
 import EditMovieForm from "./components/EditMovieForm";
 import AddMovie from "./components/AddMovie";
 
+import DeleteMovieModal from "./components/DeleteMovieModal";
 import axios from "axios";
 
 const App = (props) => {
@@ -45,6 +46,9 @@ const App = (props) => {
           <FavoriteMovieList favoriteMovies={favoriteMovies} />
 
           <Switch>
+            <Route path="/movies/edit/deletemovie/:id">
+              <DeleteMovieModal deleteMovie={deleteMovie} />
+            </Route>
             <Route path="/movies/edit/:id">
               <EditMovieForm setMovies={setMovies} />
             </Route>

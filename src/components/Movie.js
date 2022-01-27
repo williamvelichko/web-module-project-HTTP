@@ -3,6 +3,8 @@ import { Link, useParams, useHistory } from "react-router-dom";
 
 import axios from "axios";
 
+import DeleteMovieModal from "./DeleteMovieModal";
+
 const Movie = (props) => {
   const { addToFavorites, deleteMovie } = props;
 
@@ -76,14 +78,16 @@ const Movie = (props) => {
                 >
                   Edit
                 </Link>
-                <span className="delete">
-                  <input
-                    type="button"
-                    className="m-2 btn btn-danger"
-                    value="Delete"
-                    onClick={handleDelete}
-                  />
-                </span>
+                <Link to={`/movies/edit/deletemovie/${id}`}>
+                  <span className="delete">
+                    <input
+                      type="button"
+                      className="m-2 btn btn-danger"
+                      value="Delete"
+                      //onClick={<DeleteMovieModal />}
+                    />
+                  </span>
+                </Link>
               </section>
             </div>
           </div>

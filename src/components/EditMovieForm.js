@@ -44,12 +44,15 @@ const EditMovieForm = (props) => {
       });
   };
 
+  //   const handleCancel = () => {
+  //     push(`movie/${movie.id}`);
+  //   };
   const { title, director, genre, metascore, description } = movie;
 
   return (
     <div className="col">
       <div className="modal-content">
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className="modal-header">
             <h4 className="modal-title">
               Editing <strong>{movie.title}</strong>
@@ -107,9 +110,19 @@ const EditMovieForm = (props) => {
             </div>
           </div>
           <div className="modal-footer">
-            <input type="submit" className="btn btn-info" value="Save" />
-            <Link to={`/movies/1`}>
-              <input type="button" className="btn btn-default" value="Cancel" />
+            <input
+              onClick={handleSubmit}
+              type="submit"
+              className="btn btn-info"
+              value="Save"
+            />
+            <Link to={`/movies/${id}`}>
+              <input
+                //onClick={handleCancel}
+                type="button"
+                className="btn btn-default"
+                value="Cancel"
+              />
             </Link>
           </div>
         </form>
